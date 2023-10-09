@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,7 +64,7 @@ fun Place(placeName: String, year: Int, month: Int, day: Int, rating: Int, descr
             text = description
         )
         if(photoName.isNotBlank()) {
-            //Photo(photoName)
+            Photo(photoName)
         }
     }
 }
@@ -93,6 +96,18 @@ fun Rating(rating: Int) {
     }
 }
 
+@Composable
+fun Photo(photoName: String) {
+    Image(
+        painter = painterResource(id = LocalContext.current.resources.getIdentifier(photoName, "drawable", LocalContext.current.packageName)),
+        contentDescription = "photoName = $photoName",
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(width = 1.dp, color = Color.Black),
+            contentScale = ContentScale.Crop
+    )
+}
+
 
 @Preview(showBackground = true)
 @Composable
@@ -106,6 +121,6 @@ fun GreetingPreview() {
 @Composable
 fun PlacePreview() {
     HelloWorldTheme {
-        Place("placeName", 1970, 1, 1, 1, "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl", "photoName")
+        Place("placeName", 1970, 1, 1, 1, "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl", "star")
     }
 }
