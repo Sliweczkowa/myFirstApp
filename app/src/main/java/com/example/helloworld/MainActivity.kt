@@ -5,12 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.helloworld.ui.theme.HelloWorldTheme
@@ -20,9 +18,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HelloWorldTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    Greeting("userName")
                 }
             }
         }
@@ -30,11 +27,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = Color.LightGray) { // alt + enter -> widget -> container
+fun Greeting(userName: String) {
+    Surface {
         Text(
-            text = "Hello, my name is $name!",
-            modifier = Modifier.padding(24.dp)
+            text = "Hello $userName!",
+            modifier = Modifier.padding(5.dp)
         )
     }
 }
@@ -43,6 +40,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     HelloWorldTheme {
-        Greeting("Wiktoria")
+        Greeting("userName")
     }
 }
