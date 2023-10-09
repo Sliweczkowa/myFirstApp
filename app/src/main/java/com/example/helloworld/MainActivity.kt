@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
             HelloWorldTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     Greeting("userName")
+                    AddButton()
                 }
             }
         }
@@ -106,6 +107,18 @@ fun Photo(photoName: String) {
             .border(width = 1.dp, color = Color.Black),
             contentScale = ContentScale.Crop
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddButton() {
+    Image(
+        painter = painterResource(id = R.drawable.addbutton),
+        contentDescription = null,
+        colorFilter = ColorFilter.tint(Color.Green),
+        modifier = Modifier
+            .padding(5.dp)
+        )
 }
 
 
