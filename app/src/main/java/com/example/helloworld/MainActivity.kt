@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -77,21 +80,17 @@ fun Rating(rating: Int) {
         horizontalArrangement = Arrangement.End
     ) {
         for(i in 1..rating) {
-            Image(
-                painter = painterResource(id = R.drawable.star),
+            Icon(
+                imageVector = Icons.Rounded.Star,
                 contentDescription = "rating = $rating/5",
-                colorFilter = ColorFilter.tint(Color.Green),
-                modifier = Modifier
-                    .size(18.dp)
-            )
+                tint = Color.Green
+                )
         }
         for(i in rating+1..5) {
-            Image(
-                painter = painterResource(id = R.drawable.star),
+            Icon(
+                imageVector = Icons.Rounded.Star,
                 contentDescription = "rating = $rating/5",
-                colorFilter = ColorFilter.tint(Color.Gray),
-                modifier = Modifier
-                    .size(18.dp)
+                tint = Color.Gray
             )
         }
     }
@@ -112,13 +111,11 @@ fun Photo(photoName: String) {
 @Preview(showBackground = true)
 @Composable
 fun AddButton() {
-    Image(
-        painter = painterResource(id = R.drawable.addbutton),
+    Icon(
+        imageVector = Icons.Rounded.AddCircle,
         contentDescription = null,
-        colorFilter = ColorFilter.tint(Color.Green),
-        modifier = Modifier
-            .padding(5.dp)
-        )
+        tint = Color.Green
+    )
 }
 
 
@@ -134,6 +131,6 @@ fun GreetingPreview() {
 @Composable
 fun PlacePreview() {
     HelloWorldTheme {
-        Place("placeName", 1970, 1, 1, 1, "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl", "star")
+        Place("placeName", 1970, 1, 1, 1, "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl", "lena")
     }
 }
