@@ -85,18 +85,11 @@ fun Rating(rating: Int) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End
     ) {
-        for(i in 1..rating) {
+        for(i in 1..5) {
             Icon(
                 imageVector = Icons.Rounded.Star,
                 contentDescription = "rating = $rating/5",
-                tint = Color.Green
-            )
-        }
-        for(i in rating+1..5) {
-            Icon(
-                imageVector = Icons.Rounded.Star,
-                contentDescription = "rating = $rating/5",
-                tint = Color.Gray
+                tint = if (i <= rating) {Color.Green} else {Color.Gray}
             )
         }
     }
