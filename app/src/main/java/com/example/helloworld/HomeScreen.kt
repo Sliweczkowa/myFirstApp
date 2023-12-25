@@ -34,22 +34,32 @@ fun HomeScreen() {
                 .padding(20.dp),
             userName = "user" )
         Place(
-            "Koscielec",
-            1970,
-            1,
-            1,
-            1,
-            "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
-            "koscielec_1"
+            modifier = Modifier
+                .padding(
+                    horizontal = 10.dp,
+                    vertical = 20.dp
+                ),
+            placeName = "Koscielec",
+            year = 1970,
+            month = 1,
+            day = 1,
+            rating = 1,
+            description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
+            photoPath = "koscielec_1"
         )
         Place(
-            "Koscielec",
-            1970,
-            1,
-            1,
-            1,
-            "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
-            "koscielec_2"
+            modifier = Modifier
+                .padding(
+                    horizontal = 10.dp,
+                    vertical = 20.dp
+                ),
+            placeName = "Koscielec",
+            year = 1970,
+            month = 1,
+            day = 1,
+            rating = 3,
+            description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
+            photoPath = "koscielec_2"
         )
         AddButton()
     }
@@ -69,22 +79,33 @@ fun Greeting(
 }
 
 @Composable
-fun Place(placeName: String, year: Int, month: Int, day: Int, rating: Int, description: String, photoName: String?) {
+fun Place(
+    modifier: Modifier = Modifier,
+    placeName: String,
+    year: Int,
+    month: Int,
+    day: Int,
+    rating: Int,
+    description: String,
+    photoPath: String?
+) {
     Column (
-        modifier = Modifier
-            .padding(10.dp)
+        modifier = modifier
     ) {
         Row{
             Text(
-                text = "$placeName, $day.$month.$year"
+                text = "$placeName, $day.$month.$year",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
             )
             Rating(rating)
         }
         Text(
-            text = description
+            text = description,
+            fontSize = 20.sp
         )
-        if (photoName != null) {
-            Photo(photoName)
+        if (photoPath != null) {
+            Photo(photoPath)
         }
     }
 }
