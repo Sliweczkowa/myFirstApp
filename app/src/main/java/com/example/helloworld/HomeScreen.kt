@@ -32,16 +32,18 @@ fun HomeScreen() {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .padding(10.dp)
             .verticalScroll(rememberScrollState())
     ) {
         Greeting (
             modifier = Modifier
-                .padding(20.dp),
+                .padding(
+                    vertical = 20.dp
+                ),
             userName = "user" )
         Place(
             modifier = Modifier
                 .padding(
-                    horizontal = 10.dp,
                     vertical = 20.dp
                 ),
             placeName = "Koscielec",
@@ -55,7 +57,6 @@ fun HomeScreen() {
         Place(
             modifier = Modifier
                 .padding(
-                    horizontal = 10.dp,
                     vertical = 20.dp
                 ),
             placeName = "Koscielec",
@@ -68,7 +69,9 @@ fun HomeScreen() {
         )
         AddButton(
             Modifier
-                .padding(20.dp)
+                .padding(
+                    vertical = 20.dp
+                )
                 .fillMaxWidth()
                 .size(35.dp)
         )
