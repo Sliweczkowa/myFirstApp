@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -65,7 +66,12 @@ fun HomeScreen() {
             description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
             photoPath = "koscielec_2"
         )
-        AddButton()
+        AddButton(
+            Modifier
+                .padding(20.dp)
+                .fillMaxWidth()
+                .size(35.dp)
+        )
     }
 }
 
@@ -143,16 +149,16 @@ fun Photo(photoName: String) {
 }
 
 @Composable
-fun AddButton() {
+fun AddButton(
+    modifier: Modifier = Modifier
+) {
 //    Button(
 //        onClick = null
 //    ) {
         Icon(
             imageVector = Icons.Rounded.AddCircle,
             contentDescription = null,
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth(),
+            modifier = modifier,
             tint = Color.Green
         )
 //    }
