@@ -11,21 +11,28 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @Composable
 fun HomeScreen() {
-    Column {
-        Greeting("user")
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Greeting (
+            modifier = Modifier
+                .padding(20.dp),
+            userName = "user" )
         Place(
             "Koscielec",
             1970,
@@ -49,13 +56,16 @@ fun HomeScreen() {
 }
 
 @Composable
-fun Greeting(userName: String) {
-    Surface {
-        Text(
-            text = "Hello $userName!",
-            modifier = Modifier.padding(10.dp)
-        )
-    }
+fun Greeting(
+    modifier: Modifier = Modifier,
+    userName: String
+) {
+    Text(
+        text = "Hello $userName!",
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = modifier
+    )
 }
 
 @Composable
