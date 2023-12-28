@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.helloworld.Place
 import kotlinx.coroutines.flow.Flow
 
+
 interface PlaceDao {
     @Query("SELECT * FROM Place")
     fun getPlaces(): Flow<List<Place>>
