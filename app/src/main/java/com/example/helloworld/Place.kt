@@ -5,6 +5,7 @@ import androidx.room.Entity
 
 @Entity
 data class Place (
+    var placeId: Int,
     var placeName: String,
     var date: String,
     var rating: Int,
