@@ -41,32 +41,37 @@ fun HomeScreen() {
                     vertical = 20.dp
                 ),
             userName = "user" )
+
         Place(
             modifier = Modifier
                 .padding(
                     vertical = 20.dp
                 ),
-            placeName = "Koscielec",
-            year = 1970,
-            month = 1,
-            day = 1,
-            rating = 1,
-            description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
-            photoPath = "koscielec_1"
+            place = Place(
+                placeId = 0,
+                placeName = "Koscielec",
+                date = "1.1.1970",
+                rating = 1,
+                description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
+                photoPath = "koscielec_1"
+            )
         )
         Place(
             modifier = Modifier
                 .padding(
                     vertical = 20.dp
                 ),
-            placeName = "Koscielec",
-            year = 1970,
-            month = 1,
-            day = 1,
-            rating = 3,
-            description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
-            photoPath = "koscielec_2"
+            place = Place(
+                placeId = 1,
+                placeName = "Koscielec",
+                date = "1.1.1970",
+                rating = 3,
+                description = "owfclkmelkcjflejlkjl fejcixs fsejcxxj lkjoicwjfl",
+                photoPath = "koscielec_2"
+            )
+
         )
+
         AddButton(
             Modifier
                 .padding(
@@ -77,6 +82,7 @@ fun HomeScreen() {
         )
     }
 }
+
 
 @Composable
 fun Greeting(
@@ -91,37 +97,33 @@ fun Greeting(
     )
 }
 
+
 @Composable
 fun Place(
     modifier: Modifier = Modifier,
-    placeName: String,
-    year: Int,
-    month: Int,
-    day: Int,
-    rating: Int,
-    description: String,
-    photoPath: String?
+    place: Place
 ) {
     Column (
         modifier = modifier
     ) {
         Row{
             Text(
-                text = "$placeName, $day.$month.$year",
+                text = "${place.placeName}, ${place.date}",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
-            Rating(rating)
+            Rating(place.rating)
         }
         Text(
-            text = description,
+            text = place.description,
             fontSize = 20.sp
         )
-        if (photoPath != null) {
-            Photo(photoPath)
+        if (place.photoPath != "") {
+            Photo(place.photoPath)
         }
     }
 }
+
 
 @Composable
 fun Rating(rating: Int) {
@@ -139,6 +141,7 @@ fun Rating(rating: Int) {
     }
 }
 
+
 @Composable
 fun Photo(photoName: String) {
     Image(
@@ -150,6 +153,7 @@ fun Photo(photoName: String) {
         contentScale = ContentScale.Fit
     )
 }
+
 
 @Composable
 fun AddButton(
