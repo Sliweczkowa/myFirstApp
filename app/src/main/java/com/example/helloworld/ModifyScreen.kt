@@ -74,16 +74,19 @@ fun ModifyScreen(context: Context) {
 @Composable
 fun DateInput(
     modifier: Modifier = Modifier,
-    context: Context
+    context: Context,
+    date: String = ""
 ) {
     var calendar = Calendar.getInstance()
+
+    calendar.time = Date()
+
+    // TODO: retrieve form date if provided
     var year = calendar.get(Calendar.YEAR)
     var month = calendar.get(Calendar.MONTH)
     var day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    calendar.time = Date()
-
-    val date = remember { mutableStateOf("") }
+    val date = remember { mutableStateOf(date) }
     val datePickerDialog = DatePickerDialog(
         /* context = */ context,
         /* listener = */ { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
@@ -99,11 +102,11 @@ fun DateInput(
         OutlinedTextField(
             value = date.value,
             onValueChange = { date.value = it },
-            label = { Text("Date of visit (dd.mm.yyyy)") },
+            label = { Text("Date of visit ([d]d.[m]m.yyyy)") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
 
-        Spacer(modifier = Modifier.size(5.dp))
+        Spacer(modifier = Modifier.size(10.dp))
 
         Button(
             onClick = { datePickerDialog.show() },
