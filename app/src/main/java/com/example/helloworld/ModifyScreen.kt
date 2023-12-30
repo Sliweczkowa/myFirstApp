@@ -3,12 +3,12 @@ package com.example.helloworld
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.DatePicker
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DateRange
@@ -16,6 +16,7 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,12 +44,14 @@ fun ModifyScreen(context: Context) {
                 ),
             context = context
         )
+
         PlaceNameInput(
             modifier = Modifier
                 .padding(
                     vertical = 10.dp
                 )
         )
+
         DescriptionInput(
             modifier = Modifier
                 .padding(
@@ -56,8 +59,12 @@ fun ModifyScreen(context: Context) {
                 )
         )
 
-        var rate by remember { mutableStateOf(0) }
-        RatingInput(modifier = Modifier, rating = rate){ rate = it }
+        RatingInput(
+            modifier = Modifier
+                .padding(
+                    vertical = 10.dp
+                )
+        )
 
         PhotoInput()
     }
@@ -148,17 +155,28 @@ fun DescriptionInput(
 @Composable
 fun RatingInput(
     modifier: Modifier = Modifier,
-    rating: Int = 0,
-    onRatingChange: (Int) -> Unit
+    rating: Int = 0
 ) {
-    Row {
+    var rating by remember { mutableStateOf(rating) }
+
+    Row(
+        modifier = modifier,
+    ) {
         for (i in 1..5) {
-            Icon(
-                modifier = modifier.clickable{onRatingChange(i)},
-                imageVector = Icons.Rounded.Star,
-                contentDescription = null,
-                tint = if (i <= rating) {Color.Green} else {Color.Gray}
-            )
+            IconButton(
+                onClick = { rating = i },
+                modifier = Modifier.width(Icons.Rounded.Star.defaultWidth)
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Star,
+                    contentDescription = null,
+                    tint = if (i <= rating) {
+                        Color.Green
+                    } else {
+                        Color.Gray
+                    }
+                )
+            }
         }
     }
 }
@@ -167,21 +185,3 @@ fun RatingInput(
 fun PhotoInput() {
 
 }
-
-////Check when add button is clicked
-////Check if all obligatory input is present
-////Check regex for date
-//@Composable
-//fun inputCheck(): Boolean {
-//    var isCorrect = false
-//
-//    return isCorrect
-//}
-//
-////Transfer data to database if check requirements are fulfilled
-//@Composable
-//fun InputTransfer() {
-//    if(inputCheck()) {
-//        //Transfer to database
-//    }
-//}
