@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.example.helloworld.visuals.Home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.helloworld.Place
 
 
 @Composable

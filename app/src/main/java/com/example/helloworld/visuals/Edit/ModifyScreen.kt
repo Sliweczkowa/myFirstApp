@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.example.helloworld.visuals.Edit
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -6,11 +6,13 @@ import android.widget.DatePicker
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
@@ -67,6 +69,15 @@ fun ModifyScreen(context: Context) {
         )
 
         PhotoInput()
+
+        ConfirmButton(
+            modifier = Modifier
+                .padding(
+                    vertical = 10.dp
+                )
+                .fillMaxWidth()
+                .size(35.dp)
+        )
     }
 }
 
@@ -187,4 +198,20 @@ fun RatingInput(
 @Composable
 fun PhotoInput() {
 
+}
+
+@Composable
+fun ConfirmButton(
+    modifier: Modifier = Modifier
+) {
+//    Button(
+//        onClick = null
+//    ) {
+    Icon(
+        imageVector = Icons.Rounded.AddCircle,
+        contentDescription = null,
+        modifier = modifier,
+        tint = Color.Green
+    )
+//    }
 }
