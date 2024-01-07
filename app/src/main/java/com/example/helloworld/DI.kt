@@ -16,7 +16,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteDatabase(app: Application): PlaceDatabase {
+    fun providePlaceDatabase(app: Application): PlaceDatabase {
         return Room.databaseBuilder(
             app,
             PlaceDatabase::class.java,
@@ -26,7 +26,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteRepository(db: PlaceDatabase): PlaceRepo {
+    fun providePlaceRepository(db: PlaceDatabase): PlaceRepo {
         return PlaceRepo(db.placeDao)
     }
 

@@ -31,11 +31,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import java.util.Calendar
 import java.util.Date
 
 @Composable
-fun ModifyScreen(context: Context) {
+fun ModifyScreen(context: Context,
+                 viewModel: ModifyViewModel = hiltViewModel()) {
     Column (
         modifier = Modifier.padding(10.dp)
     ) {
