@@ -1,6 +1,7 @@
 package com.example.helloworld.visuals.Edit
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,7 @@ class ModifyViewModel @Inject constructor(
         private set
         var date by mutableStateOf("")
         private set
-        var rating by mutableStateOf("")
+        var rating by mutableIntStateOf(0)
         private set
         var description by mutableStateOf("")
         private set
@@ -30,14 +31,13 @@ class ModifyViewModel @Inject constructor(
         fun onDateChange(date: String) {
             this.date = date
         }
-        fun onratingChange(rating: String) {
+        fun onRatingChange(rating: Int) {
             this.rating = rating
         }
-        fun ondDscriptionChange(description: String) {
+        fun onDescriptionChange(description: String) {
             this.description = description
         }
         fun onPhotoPathChange(photoPath: String) {
             this.photoPath = photoPath
         }
-
 }

@@ -16,16 +16,13 @@ import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,6 +39,7 @@ fun ModifyScreen(context: Context,
         modifier = Modifier.padding(10.dp)
     ) {
         DateInput(
+            viewModel = viewModel,
             modifier = Modifier
                 .padding(
                     vertical = 10.dp
@@ -50,6 +48,7 @@ fun ModifyScreen(context: Context,
         )
 
         PlaceNameInput(
+            viewModel = viewModel,
             modifier = Modifier
                 .padding(
                     vertical = 10.dp
@@ -57,6 +56,7 @@ fun ModifyScreen(context: Context,
         )
 
         DescriptionInput(
+            viewModel = viewModel,
             modifier = Modifier
                 .padding(
                     vertical = 10.dp
@@ -64,13 +64,16 @@ fun ModifyScreen(context: Context,
         )
 
         RatingInput(
+            viewModel = viewModel,
             modifier = Modifier
                 .padding(
                     vertical = 10.dp
                 )
         )
 
-        PhotoInput()
+        PhotoInput(
+            viewModel = viewModel
+            )
 
         ConfirmButton(
             modifier = Modifier
@@ -83,12 +86,11 @@ fun ModifyScreen(context: Context,
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DateInput(
+    viewModel: ModifyViewModel,
     modifier: Modifier = Modifier,
     context: Context,
-    date: String = ""
 ) {
     var calendar = Calendar.getInstance()
 
@@ -99,7 +101,7 @@ fun DateInput(
     var month = calendar.get(Calendar.MONTH)
     var day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val date = remember { mutableStateOf(date) }
+    val date = remember { mutableStateOf(viewModel.date) }
     val datePickerDialog = DatePickerDialog(
         /* context = */ context,
         /* listener = */ { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
@@ -113,9 +115,10 @@ fun DateInput(
         modifier = modifier
     ) {
         OutlinedTextField(
+            // TODO: Add +1 to month
             value = date.value,
-            onValueChange = { date.value = it },
-            label = { Text("Date of visit ([d]d.[m]m.yyyy)") },
+            onValueChange = { viewModel.onDateChange(it); date.value = viewModel.date },
+            label = { Text("Date of visit") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
 
@@ -134,35 +137,29 @@ fun DateInput(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceNameInput(
-    modifier: Modifier = Modifier,
-    placeName: String = ""
+    viewModel: ModifyViewModel,
+    modifier: Modifier = Modifier
 ) {
-    var text by remember { mutableStateOf(placeName) }
-
     OutlinedTextField(
         modifier = modifier,
-        value = text,
-        onValueChange = { text = it },
+        value = viewModel.name,
+        onValueChange = { viewModel.onNameChange(it) },
         label = { Text("Name of the place") },
         singleLine = true,
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DescriptionInput(
-    modifier: Modifier = Modifier,
-    description: String = ""
+    viewModel: ModifyViewModel,
+    modifier: Modifier = Modifier
 ) {
-    var text by remember { mutableStateOf(description) }
-
     OutlinedTextField(
         modifier = modifier,
-        value = text,
-        onValueChange = { text = it },
+        value = viewModel.description,
+        onValueChange = { viewModel.onDescriptionChange(it) },
         label = { Text("Brief description") },
         maxLines = 10
     )
@@ -170,23 +167,21 @@ fun DescriptionInput(
 
 @Composable
 fun RatingInput(
+    viewModel: ModifyViewModel,
     modifier: Modifier = Modifier,
-    rating: Int = 0
 ) {
-    var rating by remember { mutableStateOf(rating) }
-
     Row(
         modifier = modifier,
     ) {
         for (i in 1..5) {
             IconButton(
-                onClick = { rating = i },
+                onClick = { viewModel.onRatingChange(i) },
                 modifier = Modifier.width(Icons.Rounded.Star.defaultWidth)
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Star,
                     contentDescription = null,
-                    tint = if (i <= rating) {
+                    tint = if (i <= viewModel.rating) {
                         Color.Green
                     } else {
                         Color.Gray
@@ -198,7 +193,9 @@ fun RatingInput(
 }
 
 @Composable
-fun PhotoInput() {
+fun PhotoInput(
+    viewModel: ModifyViewModel
+    ) {
 
 }
 
