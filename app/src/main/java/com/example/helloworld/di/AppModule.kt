@@ -5,6 +5,9 @@ import androidx.room.Room
 import com.example.helloworld.data.PlaceDatabase
 import com.example.helloworld.data.PlaceRepository
 import com.example.helloworld.data.PlaceRepositoryImplementation
+import com.example.helloworld.domain.useCase.DeletePlaceUseCase
+import com.example.helloworld.domain.useCase.GetPlacesUseCase
+import com.example.helloworld.domain.useCase.PlaceUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +32,14 @@ object AppModule {
     @Singleton
     fun providePlaceRepository(db: PlaceDatabase): PlaceRepository {
         return PlaceRepositoryImplementation(db.placeDao)
+    }
+
+    @Provides
+    @Singleton
+    fun providePlaceUseCases(repository: PlaceRepository): PlaceUseCases {
+        return PlaceUseCases(
+            getPlaces = GetPlacesUseCase(repository),
+            deletePlace = DeletePlaceUseCase(repository)
+        )
     }
 }
