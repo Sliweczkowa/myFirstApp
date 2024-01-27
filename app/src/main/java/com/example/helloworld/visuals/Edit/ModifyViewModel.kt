@@ -5,14 +5,15 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.helloworld.data.PlaceRepo
+import com.example.helloworld.data.PlaceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ModifyViewModel @Inject constructor(
-    private val placeRepo: PlaceRepo) : ViewModel() {
+    private val placeRepo: PlaceRepository
+) : ViewModel() {
 
         var name by mutableStateOf("")
         private set

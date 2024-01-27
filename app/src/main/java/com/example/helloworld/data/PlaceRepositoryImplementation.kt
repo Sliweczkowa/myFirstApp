@@ -4,23 +4,23 @@ import com.example.helloworld.domain.model.Place
 import kotlinx.coroutines.flow.Flow
 
 
-class PlaceRepo(
+class PlaceRepositoryImplementation(
     private val dao: PlaceDao
-) {
+) : PlaceRepository {
 
-    fun getPlaces(): Flow<List<Place>> {
+    override fun getPlaces(): Flow<List<Place>> {
         return dao.getPlaces()
     }
 
-    suspend fun getPlaceById(id: Int): Place? {
+    override suspend fun getPlaceById(id: Int): Place? {
         return dao.getPlaceById(id)
     }
 
-    suspend fun insertPlace(place: Place) {
+    override suspend fun insertPlace(place: Place) {
         dao.insertPlace(place)
     }
 
-    suspend fun deletePlace(place: Place) {
+    override suspend fun deletePlace(place: Place) {
         dao.deletePlace(place)
     }
 }
