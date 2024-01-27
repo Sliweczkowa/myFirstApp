@@ -2,7 +2,7 @@ package com.example.helloworld.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.helloworld.Place
+import com.example.helloworld.domain.model.Place
 
 
 @Database(

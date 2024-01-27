@@ -1,6 +1,6 @@
 package com.example.helloworld.data
 
-import com.example.helloworld.Place
+import com.example.helloworld.domain.model.Place
 import kotlinx.coroutines.flow.Flow
 
 
