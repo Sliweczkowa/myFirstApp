@@ -15,11 +15,11 @@ interface PlaceDao {
     fun getPlaces(): Flow<List<Place>>
 
     @Query("SELECT * FROM Place WHERE placeId = :id")
-    fun getPlaceById(id: Int): Place?
+    suspend fun getPlaceById(id: Int): Place?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlace(place: Place)
+    suspend fun insertPlace(place: Place)
 
     @Delete
-    fun deletePlace(place: Place)
+    suspend fun deletePlace(place: Place)
 }
