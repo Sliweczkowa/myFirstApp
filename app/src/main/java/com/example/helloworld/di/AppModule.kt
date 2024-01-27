@@ -1,9 +1,10 @@
-package com.example.helloworld
+package com.example.helloworld.di
 
 import android.app.Application
 import androidx.room.Room
 import com.example.helloworld.data.PlaceDatabase
-import com.example.helloworld.data.PlaceRepo
+import com.example.helloworld.data.PlaceRepository
+import com.example.helloworld.data.PlaceRepositoryImplementation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +27,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePlaceRepository(db: PlaceDatabase): PlaceRepo {
-        return PlaceRepo(db.placeDao)
+    fun providePlaceRepository(db: PlaceDatabase): PlaceRepository {
+        return PlaceRepositoryImplementation(db.placeDao)
     }
-
 }
