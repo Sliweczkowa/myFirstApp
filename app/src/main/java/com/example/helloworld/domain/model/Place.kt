@@ -26,3 +26,5 @@ data class Place (
     @ColumnInfo(name = "photo")
     var photoPath: String = ""
 )
+
+class InvalidPlaceException(message: String): Exception(message)
