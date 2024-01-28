@@ -105,7 +105,18 @@ fun DateInput(
     val datePickerDialog = DatePickerDialog(
         /* context = */ context,
         /* listener = */ { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            date.value = "$dayOfMonth.$month.$year"
+            if(month < 10 && day <10) {
+                date.value = "0$dayOfMonth.0${month + 1}.$year"
+            }
+            else if(month < 10) {
+                date.value = "$dayOfMonth.0${month + 1}.$year"
+            }
+            else if(day < 10) {
+                date.value = "0$dayOfMonth.${month + 1}.$year"
+            }
+            else {
+                date.value = "$dayOfMonth.${month + 1}.$year"
+            }
         },
         /* year = */ year, /* month = */ month, /* dayOfMonth = */ day
     )
@@ -115,7 +126,6 @@ fun DateInput(
         modifier = modifier
     ) {
         OutlinedTextField(
-            // TODO: Add +1 to month
             value = date.value,
             onValueChange = { viewModel.onDateChange(it); date.value = viewModel.date },
             label = { Text("Date of visit") },
