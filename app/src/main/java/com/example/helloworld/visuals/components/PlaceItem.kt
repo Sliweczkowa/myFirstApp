@@ -11,14 +11,13 @@ import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.helloworld.domain.model.Place
 
 @Composable
@@ -26,7 +25,7 @@ fun PlaceItem(
     place: Place,
     modifier: Modifier = Modifier,
 //    onEditClick: () -> Unit,
-//    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -63,20 +62,29 @@ fun PlaceItem(
             horizontalArrangement = Arrangement.End,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Icon(
-                imageVector = Icons.Rounded.Edit,
-                contentDescription = "Edit place",
-                tint = MaterialTheme.colorScheme.primary
-            )
+//            IconButton(
+//                onClick = onEditClick
+//            ){
+                Icon(
+                    imageVector = Icons.Rounded.Edit,
+                    contentDescription = "Edit place",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+//            }
             Spacer(modifier = Modifier.width(8.dp))
-            Icon(
-                imageVector = Icons.Rounded.Delete,
-                contentDescription = "Edit place",
-                tint = MaterialTheme.colorScheme.primary
-            )
+            IconButton(
+                onClick = onDeleteClick
+            ){
+                Icon(
+                    imageVector = Icons.Rounded.Delete,
+                    contentDescription = "Delete place",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
 
+//    TODO:
 //    Image(
 //        painter = painterResource(id = LocalContext.current.resources.getIdentifier(photoName, "drawable", LocalContext.current.packageName)),
 //        contentDescription = "photoName = $photoName",
