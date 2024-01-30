@@ -32,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.helloworld.visuals.PlaceEvent
 import com.example.helloworld.visuals.components.OrderBySection
 import com.example.helloworld.visuals.components.PlaceItem
 import kotlinx.coroutines.launch

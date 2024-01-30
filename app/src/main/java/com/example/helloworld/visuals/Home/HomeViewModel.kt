@@ -8,8 +8,6 @@ import com.example.helloworld.domain.model.Place
 import com.example.helloworld.domain.useCase.PlaceUseCases
 import com.example.helloworld.domain.util.OrderType
 import com.example.helloworld.domain.util.PlaceOrder
-import com.example.helloworld.visuals.PlaceEvent
-import com.example.helloworld.visuals.PlaceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
