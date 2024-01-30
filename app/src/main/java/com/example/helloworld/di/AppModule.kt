@@ -6,6 +6,7 @@ import com.example.helloworld.data.PlaceDatabase
 import com.example.helloworld.data.PlaceRepository
 import com.example.helloworld.data.PlaceRepositoryImplementation
 import com.example.helloworld.domain.useCase.DeletePlaceUseCase
+import com.example.helloworld.domain.useCase.GetPlaceByIDUseCase
 import com.example.helloworld.domain.useCase.GetPlacesUseCase
 import com.example.helloworld.domain.useCase.InsertPlaceUseCase
 import com.example.helloworld.domain.useCase.PlaceUseCases
@@ -40,6 +41,7 @@ object AppModule {
     fun providePlaceUseCases(repository: PlaceRepository): PlaceUseCases {
         return PlaceUseCases(
             getPlaces = GetPlacesUseCase(repository),
+            getPlaceById = GetPlaceByIDUseCase(repository),
             deletePlace = DeletePlaceUseCase(repository),
             insertPlace = InsertPlaceUseCase(repository)
         )

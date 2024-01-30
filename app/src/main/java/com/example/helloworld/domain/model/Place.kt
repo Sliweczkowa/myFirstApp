@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class Place (
 
     @PrimaryKey(autoGenerate = true)
-    var placeId: Int,
+    var placeId: Int?,
 
     @ColumnInfo(name = "name")
     var placeName: String,
