@@ -6,85 +6,106 @@ import android.widget.DatePicker
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import java.util.Calendar
 import java.util.Date
 
 @Composable
-fun ModifyScreen(context: Context,
-                 viewModel: ModifyViewModel = hiltViewModel()) {
-    Column (
-        modifier = Modifier.padding(10.dp)
-    ) {
-        DateInput(
-            viewModel = viewModel,
-            modifier = Modifier
-                .padding(
-                    vertical = 10.dp
-                ),
-            context = context
-        )
+fun ModifyScreen(
+    context: Context,
+    navController: NavController,
+    viewModel: ModifyViewModel = hiltViewModel()
+) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-        PlaceNameInput(
-            viewModel = viewModel,
-            modifier = Modifier
-                .padding(
-                    vertical = 10.dp
+    Scaffold(
+        // Floating save button
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    viewModel.onEvent(ModifyPlaceEvent.SavePlace)
+                },
+                containerColor = MaterialTheme.colorScheme.background
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Add,
+                    contentDescription = "Save place",
+                    tint = MaterialTheme.colorScheme.primary
                 )
-        )
-
-        DescriptionInput(
-            viewModel = viewModel,
+            }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
+        Column (
             modifier = Modifier
-                .padding(
-                    vertical = 10.dp
-                )
-        )
-
-        RatingInput(
-            viewModel = viewModel,
-            modifier = Modifier
-                .padding(
-                    vertical = 10.dp
-                )
-        )
-
-        PhotoInput(
-            viewModel = viewModel
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            DateInput(
+                viewModel = viewModel,
+                modifier = Modifier
+                    .padding(
+                        vertical = 10.dp
+                    ),
+                context = context
             )
 
-        ConfirmButton(
-            modifier = Modifier
-                .padding(
-                    vertical = 10.dp
-                )
-                .fillMaxWidth()
-                .size(35.dp)
-        )
+            PlaceNameInput(
+                viewModel = viewModel,
+                modifier = Modifier
+                    .padding(
+                        vertical = 10.dp
+                    )
+            )
+
+            DescriptionInput(
+                viewModel = viewModel,
+                modifier = Modifier
+                    .padding(
+                        vertical = 10.dp
+                    )
+            )
+
+            RatingInput(
+                viewModel = viewModel,
+                modifier = Modifier
+                    .padding(
+                        vertical = 10.dp
+                    )
+            )
+        }
     }
 }
+
 
 @Composable
 fun DateInput(
@@ -126,8 +147,8 @@ fun DateInput(
         modifier = modifier
     ) {
         OutlinedTextField(
-            value = date.value,
-            onValueChange = { viewModel.onDateChange(it); date.value = viewModel.date },
+            value = date.value.value.date,
+            onValueChange = { viewModel.onEvent(ModifyPlaceEvent.EnteredDate(it)); date.value = viewModel.date },
             label = { Text("Date of visit") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
@@ -154,8 +175,8 @@ fun PlaceNameInput(
 ) {
     OutlinedTextField(
         modifier = modifier,
-        value = viewModel.name,
-        onValueChange = { viewModel.onNameChange(it) },
+        value = viewModel.name.value.name,
+        onValueChange = { viewModel.onEvent(ModifyPlaceEvent.EnteredName(it)) },
         label = { Text("Name of the place") },
         singleLine = true,
     )
@@ -168,8 +189,8 @@ fun DescriptionInput(
 ) {
     OutlinedTextField(
         modifier = modifier,
-        value = viewModel.description,
-        onValueChange = { viewModel.onDescriptionChange(it) },
+        value = viewModel.description.value.description,
+        onValueChange = { viewModel.onEvent(ModifyPlaceEvent.EnteredDescription(it)) },
         label = { Text("Brief description") },
         maxLines = 10
     )
@@ -185,13 +206,13 @@ fun RatingInput(
     ) {
         for (i in 1..5) {
             IconButton(
-                onClick = { viewModel.onRatingChange(i) },
+                onClick = { viewModel.onEvent(ModifyPlaceEvent.EnteredRating(i)) },
                 modifier = Modifier.width(Icons.Rounded.Star.defaultWidth)
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Star,
                     contentDescription = null,
-                    tint = if (i <= viewModel.rating) {
+                    tint = if (i <= viewModel.rating.value.rating) {
                         Color.Green
                     } else {
                         Color.Gray
@@ -200,27 +221,4 @@ fun RatingInput(
             }
         }
     }
-}
-
-@Composable
-fun PhotoInput(
-    viewModel: ModifyViewModel
-    ) {
-
-}
-
-@Composable
-fun ConfirmButton(
-    modifier: Modifier = Modifier
-) {
-//    Button(
-//        onClick = null
-//    ) {
-    Icon(
-        imageVector = Icons.Rounded.AddCircle,
-        contentDescription = null,
-        modifier = modifier,
-        tint = Color.Green
-    )
-//    }
 }
