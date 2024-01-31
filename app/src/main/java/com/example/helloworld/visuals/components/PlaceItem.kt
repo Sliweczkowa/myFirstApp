@@ -1,6 +1,8 @@
 package com.example.helloworld.visuals.components
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.helloworld.domain.model.Place
 
 @Composable
@@ -56,7 +59,14 @@ fun PlaceItem(
             fontSize = MaterialTheme.typography.bodyLarge.fontSize
         )
         if (place.photoPath != "") {
-//            Photo(place.photoPath)
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                AsyncImage(
+                    model = Uri.parse(place.photoPath),
+                    contentDescription = null,
+                )
+            }
         }
         Row (
             horizontalArrangement = Arrangement.End,
@@ -83,14 +93,4 @@ fun PlaceItem(
             }
         }
     }
-
-//    TODO:
-//    Image(
-//        painter = painterResource(id = LocalContext.current.resources.getIdentifier(photoName, "drawable", LocalContext.current.packageName)),
-//        contentDescription = "photoName = $photoName",
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .border(width = 1.dp, color = Color.Black),
-//        contentScale = ContentScale.Fit
-//    )
 }

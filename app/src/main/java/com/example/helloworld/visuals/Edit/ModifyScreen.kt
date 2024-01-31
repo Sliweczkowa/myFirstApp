@@ -2,11 +2,14 @@ package com.example.helloworld.visuals.Edit
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.net.Uri
 import android.widget.DatePicker
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,6 +40,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import com.example.helloworld.visuals.components.PhotoItem
 import kotlinx.coroutines.flow.collectLatest
 import java.util.Calendar
 import java.util.Date
@@ -48,7 +53,6 @@ fun ModifyScreen(
     viewModel: ModifyViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -119,6 +123,18 @@ fun ModifyScreen(
                         vertical = 10.dp
                     )
             )
+
+            PhotoItem(saveImage = { viewModel.onEvent(ModifyPlaceEvent.EnteredPhotoPath(it.toString())) })
+            if (viewModel.photoPath.value.photoPath != "") {
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    AsyncImage(
+                        model = Uri.parse(viewModel.photoPath.value.photoPath),
+                        contentDescription = null,
+                    )
+                }
+            }
         }
     }
 }
@@ -134,7 +150,6 @@ fun DateInput(
 
     calendar.time = Date()
 
-    // TODO: retrieve form date if provided
     var year = calendar.get(Calendar.YEAR)
     var month = calendar.get(Calendar.MONTH)
     var day = calendar.get(Calendar.DAY_OF_MONTH)

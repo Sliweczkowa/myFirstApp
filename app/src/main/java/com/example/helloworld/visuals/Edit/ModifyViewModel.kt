@@ -125,20 +125,4 @@ class ModifyViewModel @Inject constructor(
             }
         }
     }
-
-//    fun onNameChange(name: String) {
-//        this.name = name
-//    }
-//    fun onDateChange(date: String) {
-//        this.date = date
-//    }
-//    fun onRatingChange(rating: Int) {
-//        this.rating = rating
-//    }
-//    fun onDescriptionChange(description: String) {
-//        this.description = description
-//    }
-//    fun onPhotoPathChange(photoPath: String) {
-//        this.photoPath = photoPath
-//    }
 }
