@@ -10,6 +10,7 @@ import com.example.helloworld.domain.model.Place
 import com.example.helloworld.domain.useCase.PlaceUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +39,7 @@ class ModifyViewModel @Inject constructor(
     val photoPath: State<ModifyPlaceState> = _photoPath
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     sealed class UiEvent {
         data class ShowSnackbar(val message: String): UiEvent()

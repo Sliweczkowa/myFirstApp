@@ -32,6 +32,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.helloworld.domain.util.Screen
 import com.example.helloworld.visuals.components.OrderBySection
 import com.example.helloworld.visuals.components.PlaceItem
 import kotlinx.coroutines.launch
@@ -39,7 +41,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
-//    navController: NavController,
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -51,7 +53,7 @@ fun HomeScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    /* TODO: Navigate to empty edit screen */
+                    navController.navigate(Screen.ModifyScreen.route)
                 },
                 containerColor = MaterialTheme.colorScheme.background
             ) {
@@ -124,8 +126,12 @@ fun HomeScreen(
                                     }
                                 }
                             },
-//                            TODO:
-//                            onEditClick = navigate to edit screen,
+                            onEditClick = {
+                                navController.navigate(
+                                    Screen.ModifyScreen.route +
+                                            "?placeId=${place.placeId}"
+                                )
+                            },
                             modifier = Modifier
                                 .fillMaxWidth()
                         )

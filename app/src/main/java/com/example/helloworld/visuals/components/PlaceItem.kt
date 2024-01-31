@@ -24,7 +24,7 @@ import com.example.helloworld.domain.model.Place
 fun PlaceItem(
     place: Place,
     modifier: Modifier = Modifier,
-//    onEditClick: () -> Unit,
+    onEditClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
     Column(
@@ -62,15 +62,15 @@ fun PlaceItem(
             horizontalArrangement = Arrangement.End,
             modifier = Modifier.fillMaxWidth()
         ) {
-//            IconButton(
-//                onClick = onEditClick
-//            ){
+            IconButton(
+                onClick = onEditClick
+            ){
                 Icon(
                     imageVector = Icons.Rounded.Edit,
                     contentDescription = "Edit place",
                     tint = MaterialTheme.colorScheme.primary
                 )
-//            }
+            }
             Spacer(modifier = Modifier.width(8.dp))
             IconButton(
                 onClick = onDeleteClick
