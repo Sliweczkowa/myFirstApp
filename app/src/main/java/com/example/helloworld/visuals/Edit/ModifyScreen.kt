@@ -127,16 +127,16 @@ fun DateInput(
         /* context = */ context,
         /* listener = */ { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             if(month < 10 && day <10) {
-                date.value = "0$dayOfMonth.0${month + 1}.$year"
+                viewModel.onEvent(ModifyPlaceEvent.EnteredDate("0$dayOfMonth.0${month + 1}.$year"))
             }
             else if(month < 10) {
-                date.value = "$dayOfMonth.0${month + 1}.$year"
+                viewModel.onEvent(ModifyPlaceEvent.EnteredDate("$dayOfMonth.0${month + 1}.$year"))
             }
             else if(day < 10) {
-                date.value = "0$dayOfMonth.${month + 1}.$year"
+                viewModel.onEvent(ModifyPlaceEvent.EnteredDate("0$dayOfMonth.${month + 1}.$year"))
             }
             else {
-                date.value = "$dayOfMonth.${month + 1}.$year"
+                viewModel.onEvent(ModifyPlaceEvent.EnteredDate("$dayOfMonth.${month + 1}.$year"))
             }
         },
         /* year = */ year, /* month = */ month, /* dayOfMonth = */ day
