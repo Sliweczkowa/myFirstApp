@@ -33,14 +33,18 @@ fun PlaceItem(
     Column(
         modifier = modifier
     ) {
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text(
                 text = "${place.placeName}, ${place.date}",
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
                 fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.width(16.dp))
-            Row {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
                 for (i in 1..5) {
                     Icon(
                         imageVector = Icons.Rounded.Star,
