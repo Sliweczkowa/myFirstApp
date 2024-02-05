@@ -74,14 +74,6 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Heading "Hello user!"
-            Text(
-                text = "Hello user!",
-                style = MaterialTheme.typography.headlineLarge
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             // Sort popup
             TextButton(
                 onClick = { viewModel.onEvent(PlaceEvent.ToggleOrderSection) }
