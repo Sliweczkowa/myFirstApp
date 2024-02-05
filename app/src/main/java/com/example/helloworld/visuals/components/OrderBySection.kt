@@ -29,20 +29,19 @@ fun OrderBySection(
                 selected = placeOrder is PlaceOrder.PlaceName,
                 onSelect = { onOrderChange(PlaceOrder.PlaceName(placeOrder.orderType)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             DefaultRadioButton(
                 name = "Date",
                 selected = placeOrder is PlaceOrder.Date,
                 onSelect = { onOrderChange(PlaceOrder.Date(placeOrder.orderType)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             DefaultRadioButton(
                 name = "Rating",
                 selected = placeOrder is PlaceOrder.Rating,
                 onSelect = { onOrderChange(PlaceOrder.Rating(placeOrder.orderType)) }
             )
         }
-        Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -51,7 +50,7 @@ fun OrderBySection(
                 selected = placeOrder.orderType is OrderType.Ascending,
                 onSelect = { onOrderChange(placeOrder.copy(OrderType.Ascending)) }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             DefaultRadioButton(
                 name = "Descending",
                 selected = placeOrder.orderType is OrderType.Descending,
