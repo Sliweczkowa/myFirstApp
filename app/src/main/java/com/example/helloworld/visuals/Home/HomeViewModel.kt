@@ -1,4 +1,4 @@
-package com.example.helloworld.visuals.Home
+package com.example.helloworld.visuals.home
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

@@ -17,8 +17,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.helloworld.domain.util.Screen
 import com.example.helloworld.ui.theme.HelloWorldTheme
-import com.example.helloworld.visuals.Edit.ModifyScreen
-import com.example.helloworld.visuals.Home.HomeScreen
+import com.example.helloworld.visuals.edit.ModifyScreen
+import com.example.helloworld.visuals.home.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 

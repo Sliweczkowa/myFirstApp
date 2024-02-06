@@ -1,4 +1,4 @@
-package com.example.helloworld.visuals.Home
+package com.example.helloworld.visuals.home
 
 import com.example.helloworld.domain.model.Place
 import com.example.helloworld.domain.util.OrderType

@@ -1,4 +1,4 @@
-package com.example.helloworld.visuals.Edit
+package com.example.helloworld.visuals.edit
 
 data class ModifyPlaceState (
     val name: String = "",

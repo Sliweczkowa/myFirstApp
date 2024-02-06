@@ -1,4 +1,4 @@
-package com.example.helloworld.visuals.Edit
+package com.example.helloworld.visuals.edit
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

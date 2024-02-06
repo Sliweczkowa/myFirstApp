@@ -1,4 +1,4 @@
-package com.example.helloworld.visuals.Edit
+package com.example.helloworld.visuals.edit
 
 sealed class ModifyPlaceEvent {
     data class EnteredName(val value: String): ModifyPlaceEvent()
